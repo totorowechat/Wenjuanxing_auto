@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import time
 import re
 import random
+from tqdm import trange
 
 
 # soup = BeautifulSoup(rsp.text, 'html.parser')
@@ -101,26 +102,29 @@ class wenjuanxini(object):
     def post_quest(self):
         self.get_random_ip() #随机IP
         rsp = self.session.post(self.submit_host_url, data=self.submit_data, headers=self.headers)
-        print(rsp.text)
-        print(rsp.request.url)
+        # print(rsp.text)
+        # print(rsp.request.url)
     
     def refresh_session(self):
         self.session = requests.session()
 def main():
-    num = 25839037
-    wjx = wenjuanxini(num)
-    wjx.getHtml()
-    wjx.getRandNum()
-    wjx.get_submit_url(300,1000)
-    wjx.get_title_list()
-    wjx.random_choose()
-    print(wjx.title_list)
-    wjx.get_submit_data()
-    print(wjx.submit_data)
-    wjx.post_quest()
-    wjx.refresh_session()
-    print(wjx.submit_host_url)
-    time.sleep(0.5)
+    num = 26194380
+    times = 5
+
+    for i in trange(times):
+        wjx = wenjuanxini(num)
+        wjx.getHtml()
+        wjx.getRandNum()
+        wjx.get_submit_url(300,1000)
+        wjx.get_title_list()
+        wjx.random_choose()
+        # print(wjx.title_list)
+        wjx.get_submit_data()
+        # print(wjx.submit_data)
+        wjx.post_quest()
+        wjx.refresh_session()
+        # print(wjx.submit_host_url)
+        time.sleep(1)
 
 if __name__ == '__main__':
     main()

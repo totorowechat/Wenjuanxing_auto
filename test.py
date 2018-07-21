@@ -17,9 +17,6 @@
 # test('2')
 
 lambda_list = lambda n: lambda_list(n-1) + (lambda x: x * (n-1),) if n else () 
-# lambda_list(0-1) + (lambda x: x * (0-1),) ()  + (lambda x: x * (1-1),) + (lambda x: x * (2-1),) 
-
-
 fs = lambda_list(2)
 print(fs[1](5))  # 15)
 
